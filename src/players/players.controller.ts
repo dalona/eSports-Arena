@@ -13,7 +13,7 @@ import { Player } from './entities/player.entity';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 
-@ApiTags('users') // Tag to group related endpoints
+@ApiTags('Players') // Tag to group related endpoints
 @Controller('players')
 export class PlayersController {
   constructor(
@@ -48,7 +48,7 @@ export class PlayersController {
   }
 
   @Patch('update/')
-
+  @ApiOperation({ summary: 'Update user by email' })
   async update(
     @Body('email') email: string,
     @Body() UpdatePlayerDto: UpdatePlayerDto,
@@ -57,8 +57,8 @@ export class PlayersController {
   }
 
 
-  @Delete('')
-
+  @Delete()
+  @ApiOperation({ summary: 'Delete user by email' })
   remove(@Body('email') email: string): Promise<string>{
     return this.playerService.remove(email);
   }

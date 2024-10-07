@@ -4,6 +4,13 @@ import { Role } from "src/common/enums/role.enum";
 
 export class CreatePlayerDto {
     
+
+    @ApiProperty({ example: 'Joe Arroyo', description: 'User Name' })
+    @IsString()
+    @MinLength(3)
+    @MaxLength(100)
+    username: string;
+
     @ApiProperty({ example: 'cristo@example.com', description: 'User email' })
     @IsEmail()
     @MinLength(6)
@@ -21,7 +28,7 @@ export class CreatePlayerDto {
 
     @ApiProperty({ example: 'admin', description: 'Role'})
     @IsEnum(Role, {
-        message: 'Role must be either user or admin.'
+        message: 'Role must be either player or admin.'
     })
     role: Role;
 }

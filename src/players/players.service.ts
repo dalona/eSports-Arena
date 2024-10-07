@@ -33,7 +33,7 @@ export class PlayersService {
       });
   
       await this.userRepository.save(user);
-      console.log(`User '${user.username}' with role '${user.role}' created successfully`);
+      console.log(`User '${user.username}' with role '${user.role}' was successfully created`);
       return {
         username: user.username,
         email: user.email,
