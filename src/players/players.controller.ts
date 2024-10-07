@@ -5,21 +5,29 @@ import {
   Patch,
   Delete,
   Get,
-  Param
+  Param,
+  UseGuards
 } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PlayersService } from './players.service';
 import { Player } from './entities/player.entity';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/common/enums/roles.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
 @ApiTags('Players') // Tag to group related endpoints
 @Controller('players')
+
 export class PlayersController {
   constructor(
   private readonly playerService: PlayersService) {}
 
   @Get()
+  @UseGuards(AuthGuard('jwt'),RolesGuard)
+  @Roles(Role.Admin)
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Users List.', type: [Player] })
   async findAll(): Promise<Player[]> {
@@ -48,6 +56,7 @@ export class PlayersController {
   }
 
   @Patch('update/')
+  @Roles(Role.Admin)
   @ApiOperation({ summary: 'Update user by email' })
   async update(
     @Body('email') email: string,
@@ -58,6 +67,8 @@ export class PlayersController {
 
 
   @Delete()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   @ApiOperation({ summary: 'Delete user by email' })
   remove(@Body('email') email: string): Promise<string>{
     return this.playerService.remove(email);
