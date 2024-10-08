@@ -9,10 +9,17 @@ import { UpdatePlayerDto } from './dto/update-player.dto';
 
 @Injectable()
 export class PlayersService {
+
+  
   constructor(
     @InjectRepository(Player)
     private readonly userRepository: Repository<Player>,
   ) {}
+
+
+  async findOne(playerId: number): Promise<Player | null> {
+    return this.userRepository.findOne({ where: { id: playerId } });
+  }
 
   async create(createUserDto: CreatePlayerDto): Promise<Partial<Player>> {
     try {
