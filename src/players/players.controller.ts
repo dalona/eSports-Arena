@@ -56,6 +56,7 @@ export class PlayersController {
   }
 
   @Patch('update/')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(Role.Admin)
   @ApiOperation({ summary: 'Update user by email' })
   async update(
