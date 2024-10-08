@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateTournamentDto } from './create-tournament.dto';
 
-export class UpdateTournamentDto extends PartialType(CreateTournamentDto) {}
+export class UpdateTournamentDto {
+    readonly name?: string;
+    readonly startDate?: Date;
+    readonly endDate?: Date;
+  }
+  

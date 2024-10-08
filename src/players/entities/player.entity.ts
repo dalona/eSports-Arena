@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Role } from "src/common/enums/role.enum";
+import { Tournament } from "src/tournaments/entities/tournament.entity";
 
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 
 @Entity("Players")
 export class Player {
@@ -65,6 +66,7 @@ export class Player {
     @UpdateDateColumn({ type: 'timestamp' })
     lastUpdateDate: Date;
 
-
+    @ManyToMany(() => Tournament, tournament => tournament.players)
+    tournaments: Tournament[];
 
 }
