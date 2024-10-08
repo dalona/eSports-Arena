@@ -23,7 +23,7 @@ async generateRandomMatches(tournamentId: number): Promise<Match[]> {
     where:{ id: tournamentId }, //Using an object with the 'where' property to search by ID
     relations: ['players'], // Loads relationship Players
   });
-  
+
   if (!tournament) {
     throw new NotFoundException(`Tournament with ID ${tournamentId} not found`);
   }

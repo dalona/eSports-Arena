@@ -1,7 +1,13 @@
+import { IsString, IsDateString, IsOptional } from 'class-validator';
 
 export class CreateTournamentDto {
-    readonly name: string;
-    readonly startDate: Date;
-    readonly endDate?: Date;
-  }
-  
+  @IsString()
+  name: string;
+
+  @IsDateString()
+  startDate: string;
+
+  @IsOptional()
+  @IsDateString()
+  endDate?: string;
+}
