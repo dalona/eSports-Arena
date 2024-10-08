@@ -1,85 +1,137 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# eSports Arena API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**Arena eSports API** is an API developed with **NestJS** to manage tournaments and players on the Arena eSports platform. It allows you to register new players, create, update and delete tournaments, add players to tournaments, generate random pairings, record competition results and view detailed information about events and participants with filters, sorting and pagination.
 
-## Project setup
+## Characteristics
+
+- **Player Management:** Register, update, and delete players.
+- **Tournament Management:** Create, update, and delete tournaments.
+- **Player Tournament Assignment:** Add and remove players from tournaments.
+- **Random Matchmaking:** Create random matchups within a tournament.
+- **Results Recording:** Record winner, loser, and scores for each match.
+- **Results Query:** Filter by score, sort by ranking, and paginate results.
+- **API Documentation:** Swagger interface for exploring and testing endpoints.
+
+## Tabla de Contenidos
+
+- [Installation](#installation)
+- [Prerequisites](#prerequisites)
+- [Clone Repository](#clone-repository)
+- [Install Dependencies](#install-dependencies)
+- [Configuration](#configuration)
+- [Environment Variables](#environment-variables)
+- [Database Configuration](#database-configuration)
+- [Usage](#usage)
+- [Run Server](#run-server)
+- [Access API Documentation](#access-api-documentation)
+- [Testing](#testing)
+- [Technologies](#technologies)
+- [Contribution](#contribution)
+- [License](#license)
+- [Contact](#contact)
+
+## Installation
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- **Node.js** (version 14 or higher)
+- **npm** (comes with Node.js)
+- **PostgreSQL** (for the database)
+
+### Clone the Repository
 
 ```bash
-$ npm install
+git clone https://https://github.com/dalona/eSports-Arena
+cd e-sports
 ```
 
-## Compile and run the project
+Configuration
+Environment Variables
+The project uses environment variables to manage environment-specific and sensitive settings. Create a .env file in the root of the project based on the example file provided.
 
-```bash
-# development
-$ npm run start
+Create the .env file:`
 
-# watch mode
-$ npm run start:dev
+Copy the example file and rename it:
 
-# production mode
-$ npm run start:prod
-```
+bash
+Copy code
+cp .env.example .env
+Set variables in .env:
+Open the .env file and set the variables according to your environment:
 
-## Run tests
+env
+Copy code
+# Port on which the application will run
+PORT=3000
 
-```bash
-# unit tests
-$ npm run test
+# PostgreSQL database configuration
+DB_USER=postgres.pznqqjbjacsknmyemtmf
+DB_HOST=aws-0-us-west-1.pooler.supabase.com
+DB_PASSWORD=eSports-Arena
+DB_DATABASE=postgres
+DB_PORT=6543
+JWT_SECRET=eSports-Arena
 
-# e2e tests
-$ npm run test:e2e
+# Swagger configuration (optional)
+SWAGGER_PATH=api
+Database configuration
+Create the Database:
+Make sure you have PostgreSQL installed and create a database called arena_esports (or whatever name you specified in .env):
 
-# test coverage
-$ npm run test:cov
-```
+sql
+Copy English:code
+CREATE DATABASE arena_esports;
+Migrations (Optional):
+If you use migrations to manage the database schema, run:
 
-## Resources
+bash
+Copy code
+npm run typeorm migration:run
+Note: Make sure you have TypeORM configured correctly in your project.
 
-Check out a few resources that may come in handy when working with NestJS:
+Usage
+Running the Server
+To start the server in development mode with Hot Reloading, use:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+bash
+Copy code
+npm run start:dev
+To start the server in production mode:
 
-## Support
+bash
+Copy code
+npm run build
+npm run start:prod
+The server will run on the port specified in the .env file (by default, 3000).
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Accessing API Documentation
+API documentation is available through Swagger. Once the server is up and running, go to:
 
-## Stay in touch
+bash
+Copy code
+http://localhost:3000/api
+There you can explore and test the different API endpoints.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Testing
+The project uses Jest to perform unit and end-to-end testing.
 
-## License
+Run all tests:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+bash
+Copy code
+npm run test
+Run tests in observer mode:
+
+bash
+Copy code
+npm run test:watch
+Generate coverage report:
+
+bash
+Copy code
+npm run test:cov
